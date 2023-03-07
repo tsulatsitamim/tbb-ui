@@ -1,11 +1,9 @@
 <script setup lang="ts">
+import SideBar from './components/SideBar.vue'
 </script>
 
 <template>
-  <main class="bg-black text-white">
-    Testing
-  </main>
+  <SideBar />
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

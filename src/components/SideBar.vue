@@ -2,9 +2,15 @@
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSidebarStore } from '@/stores/sidebar'
-const store = useSidebarStore()
+import { useAuthStore } from '@/stores/auth'
+import { intersection } from 'ramda'
+import tokenService from '../services/token.service'
 
-const { isShowSidebarMobile, isExpandSidebar, department } = storeToRefs(store)
+const sidebarStore = useSidebarStore()
+const authStore = useAuthStore()
+
+const { isShowSidebarMobile, isExpandSidebar, department } = storeToRefs(sidebarStore)
+const { authUser } = storeToRefs(authStore)
 
 const {
   showSidebar,
@@ -13,7 +19,7 @@ const {
   expandSidebar,
   toggleExpandSidebar,
   toggleSidebar
-} = store
+} = sidebarStore
 
 const departmentDropdown = ref(false)
 
@@ -29,6 +35,79 @@ const programs = [
   { id: 'TKI', title: 'TKI' },
   { id: 'TKM', title: 'TKM' }
 ]
+
+const routes = [
+  {
+    path: '/',
+    name: 'Dashboard',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="">
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <polygon points="0 0 24 0 24 24 0 24"/>
+                <path d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z" fill="currentColor" fill-rule="nonzero"/>
+                <path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="currentColor" opacity="0.3"/>
+            </g>
+          </svg>`
+  },
+  {
+    path: '/chat',
+    name: 'Chat',
+    badge: 'badge-chat',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="">
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <rect x="0" y="0" width="24" height="24"/>
+                  <path d="M16,15.6315789 L16,12 C16,10.3431458 14.6568542,9 13,9 L6.16183229,9 L6.16183229,5.52631579 C6.16183229,4.13107011 7.29290239,3 8.68814808,3 L20.4776218,3 C21.8728674,3 23.0039375,4.13107011 23.0039375,5.52631579 L23.0039375,13.1052632 L23.0206157,17.786793 C23.0215995,18.0629336 22.7985408,18.2875874 22.5224001,18.2885711 C22.3891754,18.2890457 22.2612702,18.2363324 22.1670655,18.1421277 L19.6565168,15.6315789 L16,15.6315789 Z" fill="currentColor"/>
+                  <path d="M1.98505595,18 L1.98505595,13 C1.98505595,11.8954305 2.88048645,11 3.98505595,11 L11.9850559,11 C13.0896254,11 13.9850559,11.8954305 13.9850559,13 L13.9850559,18 C13.9850559,19.1045695 13.0896254,20 11.9850559,20 L4.10078614,20 L2.85693427,21.1905292 C2.65744295,21.3814685 2.34093638,21.3745358 2.14999706,21.1750444 C2.06092565,21.0819836 2.01120804,20.958136 2.01120804,20.8293182 L2.01120804,18.32426 C1.99400175,18.2187196 1.98505595,18.1104045 1.98505595,18 Z M6.5,14 C6.22385763,14 6,14.2238576 6,14.5 C6,14.7761424 6.22385763,15 6.5,15 L11.5,15 C11.7761424,15 12,14.7761424 12,14.5 C12,14.2238576 11.7761424,14 11.5,14 L6.5,14 Z M9.5,16 C9.22385763,16 9,16.2238576 9,16.5 C9,16.7761424 9.22385763,17 9.5,17 L11.5,17 C11.7761424,17 12,16.7761424 12,16.5 C12,16.2238576 11.7761424,16 11.5,16 L9.5,16 Z" fill="currentColor" opacity="0.3"/>
+              </g>
+          </svg>`
+  },
+  {
+    path: '/dosen/sarjana/mbkm',
+    name: 'MBKM',
+    position_id: 3,
+    departments: ['TKI'],
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24"/>
+                        <path d="M13,17.0484323 L13,18 L14,18 C15.1045695,18 16,18.8954305 16,20 L8,20 C8,18.8954305 8.8954305,18 10,18 L11,18 L11,17.0482312 C6.89844817,16.5925472 3.58685702,13.3691811 3.07555009,9.22038742 C3.00799634,8.67224972 3.3975866,8.17313318 3.94572429,8.10557943 C4.49386199,8.03802567 4.99297853,8.42761593 5.06053229,8.97575363 C5.4896663,12.4577884 8.46049164,15.1035129 12.0008191,15.1035129 C15.577644,15.1035129 18.5681939,12.4043008 18.9524872,8.87772126 C19.0123158,8.32868667 19.505897,7.93210686 20.0549316,7.99193546 C20.6039661,8.05176407 21.000546,8.54534521 20.9407173,9.09437981 C20.4824216,13.3000638 17.1471597,16.5885839 13,17.0484323 Z" fill="currentColor" fill-rule="nonzero"/>
+                        <path d="M12,14 C8.6862915,14 6,11.3137085 6,8 C6,4.6862915 8.6862915,2 12,2 C15.3137085,2 18,4.6862915 18,8 C18,11.3137085 15.3137085,14 12,14 Z M8.81595773,7.80077353 C8.79067542,7.43921955 8.47708263,7.16661749 8.11552864,7.19189981 C7.75397465,7.21718213 7.4813726,7.53077492 7.50665492,7.89232891 C7.62279197,9.55316612 8.39667037,10.8635466 9.79502238,11.7671393 C10.099435,11.9638458 10.5056723,11.8765328 10.7023788,11.5721203 C10.8990854,11.2677077 10.8117724,10.8614704 10.5073598,10.6647638 C9.4559885,9.98538454 8.90327706,9.04949813 8.81595773,7.80077353 Z" fill="currentColor" opacity="0.3"/>
+                    </g>
+                </svg>`,
+    showInSidebar: true
+  },
+  {
+    name: 'Akun',
+  },
+  {
+    path: '/user/me',
+    name: 'Edit Akun',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="">
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <polygon points="0 0 24 0 24 24 0 24"/>
+                  <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="currentColor" fill-rule="nonzero" opacity="0.3"/>
+                  <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="currentColor" fill-rule="nonzero"/>
+              </g>
+          </svg>`,
+  },
+]
+
+function isHasAccess({ position_id, roles, departments }: any) {
+  if (departments && !departments.includes(tokenService.getDepartment())) {
+    return false
+  }
+
+  if (!position_id && !roles) {
+    return true
+  }
+
+  if (roles) {
+    return intersection(
+      authUser ? authUser.value.roles : [],
+      roles
+    ).length
+  }
+
+  return position_id === authUser.value.positionId || false
+}
 </script>
 
 <template>
@@ -42,7 +121,12 @@ const programs = [
   >
     <div class="px-[25px] flex items-center justify-between h-[67px]">
       <a href="/" class="flex items-center">
-        <img alt="Logo" :class="!isExpandSidebar && 'md:hidden'" class="h-8" src="../assets/logo-ugm.png" />
+        <img
+          alt="Logo"
+          :class="!isExpandSidebar && 'md:hidden'"
+          class="h-8"
+          src="../assets/logo-ugm.png"
+        />
         <span :class="!isExpandSidebar && 'md:hidden'" class="ml-4">{{ department }}</span>
       </a>
       <button class="h-[58px] flex items-center" @click="toggleExpandSidebar">
@@ -122,9 +206,9 @@ const programs = [
             </div>
           </div>
         </li>
-        <!-- <template v-for="(item, index) in routes">
+        <template v-for="(item, index) in routes" :key="index">
           <router-link
-            v-if="item.path && !item.children && isHasAccess(item)"
+            v-if="item.path && !item.children"
             :key="item.path"
             v-slot="{ href, route, navigate, isActive, isExactActive }"
             :to="item.path"
@@ -135,22 +219,22 @@ const programs = [
                 ((isActive && item.path !== '/') || isExactActive) && 'bg-slate-100 text-primary'
               ]"
             >
-              <a :href="href" class="flex items-center hover:text-current" @click="navigate"
+              <a :href="href" class="flex items-center hover:text-current relative" @click="navigate"
                 ><span
                   :class="!isExpandSidebar && 'md:w-min'"
                   class="flex w-[35px]"
                   v-html="item.icon"
                 ></span
                 ><span :class="!isExpandSidebar && 'md:hidden'">{{ item.name }}</span>
-                <span v-if="item.badge" :id="item.badge" class="menu-label d-none">
-                  <span class="label label-danger label-inline">new</span>
+                <span v-if="item.badge" :id="item.badge" class="absolute left-full bottom-1/2">
+                  <span class="bg-primary text-white px-1.5 py-0.5 text-xs rounded-full">new</span>
                 </span>
               </a>
             </li>
           </router-link>
 
           <li
-            v-if="item.children && isHasAccess(item)"
+            v-if="item.children"
             :key="item.path"
             class="flex flex-col"
             :class="[$route.path.includes(item.path) && '!bg-slate-100 !text-primary']"
@@ -158,7 +242,6 @@ const programs = [
             <a
               href="javascript:;"
               class="px-[25px] py-[9px] min-h-[44px] cursor-pointer relative flex items-center text-[#3f4254] bg-white hover:bg-slate-100 hover:text-primary"
-              @click="toggleDropdownSubmenu(index.toString())"
             >
               <span
                 class="flex w-[35px]"
@@ -209,11 +292,8 @@ const programs = [
             </div>
           </li>
 
-          <li
-            v-if="!item.icon && isHasAccess(item)"
-            :key="item.name"
-            class="mt-5 px-[25px] flex items-center h-10"
-          >
+          <!-- Divider -->
+          <li v-if="!item.icon" class="mt-5 px-[25px] flex items-center h-10">
             <h4
               class="text-[.9rem] uppercase font-semibold text-[#7e8299] tracking-wide"
               :class="!isExpandSidebar && 'md:w-0 overflow-hidden'"
@@ -221,7 +301,7 @@ const programs = [
               {{ item.name }}
             </h4>
           </li>
-        </template> -->
+        </template>
         <li
           class="px-[25px] py-[9px] min-h-[44px] cursor-pointer relative flex flex-grow items-center text-[#3f4254] hover:bg-slate-100 hover:text-primary"
         >

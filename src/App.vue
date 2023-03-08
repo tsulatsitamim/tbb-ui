@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import SideBar from './components/SideBar.vue'
+import Layout from './components/Layout.vue'
 </script>
 
 <template>
-  <div class="bg-secondary">
-    <SideBar />
-    <div class="w-full h-screen"></div>
+  <div class="bg-secondary text-[13px]">
+    <Layout />
   </div>
 </template>
 

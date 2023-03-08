@@ -116,7 +116,7 @@ function isHasAccess({ position_id, roles, departments }: any) {
     }"
     class="fixed flex-col left-0 h-screen bg-white z-[1001] w-[calc(100vw-16px)] max-w-[265px]"
   >
-    <div class="px-[25px] flex items-center justify-between h-[67px]">
+    <div class="px-[25px] items-center justify-between h-[67px] hidden md:flex">
       <a href="/" class="flex items-center">
         <img
           alt="Logo"
@@ -161,7 +161,7 @@ function isHasAccess({ position_id, roles, departments }: any) {
     </div>
     <div id="sidebar-container" class="my-4 overflow-scroll custom-scroll h-full">
       <ul class="list-none">
-        <li class="px-[25px] mb-[30px]">
+        <li class="px-[25px] mb-[30px] hidden md:block">
           <div class="relative" :class="!isExpandSidebar && 'md:w-0 overflow-hidden'">
             <button
               type="button"

@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="flex justify-between items-center fixed top-0 inset-x-0 z-[97] px-4 h-[55px] min-h-[55px]"
+    class="flex justify-between items-center fixed top-0 inset-x-0 z-[97] px-4 h-[55px] min-h-[55px] bg-white md:hidden"
   >
     <a href="/" class="flex items-center">
       <img alt="Logo" src="../assets/logo-ugm.png" style="height: 30px" />

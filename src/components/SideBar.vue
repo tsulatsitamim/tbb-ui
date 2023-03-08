@@ -75,7 +75,7 @@ const routes = [
     showInSidebar: true
   },
   {
-    name: 'Akun',
+    name: 'Akun'
   },
   {
     path: '/user/me',
@@ -86,8 +86,8 @@ const routes = [
                   <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="currentColor" fill-rule="nonzero" opacity="0.3"/>
                   <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="currentColor" fill-rule="nonzero"/>
               </g>
-          </svg>`,
-  },
+          </svg>`
+  }
 ]
 
 function isHasAccess({ position_id, roles, departments }: any) {
@@ -100,10 +100,7 @@ function isHasAccess({ position_id, roles, departments }: any) {
   }
 
   if (roles) {
-    return intersection(
-      authUser ? authUser.value.roles : [],
-      roles
-    ).length
+    return intersection(authUser ? authUser.value.roles : [], roles).length
   }
 
   return position_id === authUser.value.positionId || false
@@ -219,14 +216,22 @@ function isHasAccess({ position_id, roles, departments }: any) {
                 ((isActive && item.path !== '/') || isExactActive) && 'bg-slate-100 text-primary'
               ]"
             >
-              <a :href="href" class="flex items-center hover:text-current relative" @click="navigate"
+              <a
+                :href="href"
+                class="flex items-center hover:text-current relative"
+                @click="navigate"
                 ><span
                   :class="!isExpandSidebar && 'md:w-min'"
                   class="flex w-[35px]"
                   v-html="item.icon"
                 ></span
                 ><span :class="!isExpandSidebar && 'md:hidden'">{{ item.name }}</span>
-                <span v-if="item.badge" :id="item.badge" class="absolute left-full bottom-1/2">
+                <span
+                  v-if="item.badge"
+                  :id="item.badge"
+                  class="absolute bottom-1/2 bg-primary text-white text-xs rounded-full left-full"
+                  :class="!isExpandSidebar ? 'md:left-1/2' : 'md:left-full '"
+                >
                   <span class="bg-primary text-white px-1.5 py-0.5 text-xs rounded-full">new</span>
                 </span>
               </a>

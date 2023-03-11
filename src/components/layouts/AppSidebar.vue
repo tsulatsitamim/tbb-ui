@@ -1,6 +1,16 @@
 <script setup>
 import { onMounted } from 'vue'
 
+defineProps({
+  title: { type: String, default: 'TBB UI' },
+  menus: {
+    type: Array,
+    default() {
+      return { name: 'Dashboard', path: '/' }
+    }
+  }
+})
+
 onMounted(() => {
   document.getElementById('aside-overlay').addEventListener('click', () => {
     document.body.classList.remove('sidebar-active')
@@ -17,15 +27,19 @@ onMounted(() => {
       <div class="h-16 px-6 flex items-center">
         <a href="/" class="flex items-center">
           <img src="https://siadtmi.com/img/logo-ugm.3b61ee2b.png" class="h-7" alt="Logo" />
-          <span class="ml-3 text-base font-semibold text-indigo-500 hover:text-indigo-700"
-            >TBB UI</span
-          >
+          <span class="ml-3 text-base font-semibold text-indigo-500 hover:text-indigo-700">{{
+            title
+          }}</span>
         </a>
       </div>
       <div>
         <div class="my-3">
           <ul class="text-gray-700">
-            <li v-for="i in 10" :key="i" class="hover:bg-slate-100 group hover:text-indigo-600">
+            <li
+              v-for="menu in menus"
+              :key="menu.path"
+              class="hover:bg-slate-100 group hover:text-indigo-600"
+            >
               <RouterLink to="/" class="flex items-center gap-3 px-6 py-3">
                 <div>
                   <svg
@@ -50,7 +64,7 @@ onMounted(() => {
                     </g>
                   </svg>
                 </div>
-                <div class="pt-1">Dashboard</div>
+                <div class="pt-1">{{ menu.name }}</div>
               </RouterLink>
             </li>
           </ul>

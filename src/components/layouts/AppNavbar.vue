@@ -1,5 +1,8 @@
 <script setup>
 import { onMounted } from 'vue'
+defineProps({
+  title: { type: String, default: 'TBB UI' }
+})
 
 onMounted(() => {
   document.getElementById('sidebar-menu').addEventListener('click', () => {
@@ -15,9 +18,9 @@ onMounted(() => {
     >
       <a href="/" class="flex items-center">
         <img src="https://siadtmi.com/img/logo-ugm.3b61ee2b.png" class="h-7" alt="Logo" />
-        <span class="ml-3 text-base font-semibold text-indigo-500 hover:text-indigo-700"
-          >TBB UI</span
-        >
+        <span class="ml-3 text-base font-semibold text-indigo-500 hover:text-indigo-700">{{
+          title
+        }}</span>
       </a>
 
       <div class="flex items-center">

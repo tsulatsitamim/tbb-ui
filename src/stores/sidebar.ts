@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 export const useSidebarStore = defineStore('sidebar', () => {
   const isExpandSidebar = ref(true)
-  const isShowSidebarMobile = ref(true)
+  const isShowSidebarMobile = ref(false)
   const department = ref('TKI S2')
   
   function toggleExpandSidebar() {

@@ -1,12 +1,13 @@
 <script setup>
 import { onMounted } from 'vue'
+import IconHome from '../icons/IconHome.vue';
 
 defineProps({
   title: { type: String, default: 'TBB UI' },
   menus: {
     type: Array,
     default() {
-      return { name: 'Dashboard', path: '/' }
+      return [{ name: 'Dashboard', path: '/', icon: IconHome }]
     }
   }
 })
@@ -42,7 +43,10 @@ onMounted(() => {
             >
               <RouterLink :to="menu.path" class="flex items-center gap-3 px-6 py-3">
                 <div>
-                  <component :is="menu.icon" class="h-5 fill-[#c4cff9] group-hover:fill-[#5867dd]"></component>
+                  <component
+                    :is="menu.icon"
+                    class="h-5 fill-[#c4cff9] group-hover:fill-[#5867dd]"
+                  ></component>
                 </div>
                 <div class="pt-1">{{ menu.name }}</div>
               </RouterLink>

@@ -1,6 +1,8 @@
 <script setup>
 import { onMounted } from 'vue'
+import { useRoute } from 'vue-router';
 import IconHome from '../icons/IconHome.vue';
+
 
 defineProps({
   title: { type: String, default: 'TBB UI' },
@@ -11,6 +13,8 @@ defineProps({
     }
   }
 })
+
+const route = useRoute()
 
 onMounted(() => {
   document.getElementById('aside-overlay').addEventListener('click', () => {
@@ -40,12 +44,14 @@ onMounted(() => {
               v-for="menu in menus"
               :key="menu.path"
               class="hover:bg-slate-100 group hover:text-indigo-600"
+              :class="route.path.includes(menu.path) && 'bg-slate-100 text-indigo-600'"
             >
               <RouterLink :to="menu.path" class="flex items-center gap-3 px-6 py-3">
                 <div>
                   <component
                     :is="menu.icon"
                     class="h-5 fill-[#c4cff9] group-hover:fill-[#5867dd]"
+                    :class="route.path.includes(menu.path) && 'fill-[#5867dd]'"
                   ></component>
                 </div>
                 <div class="pt-1">{{ menu.name }}</div>

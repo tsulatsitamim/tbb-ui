@@ -1,3 +1,13 @@
+<script setup>
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  document.getElementById('sidebar-menu').addEventListener('click', () => {
+    document.body.classList.add('sidebar-active')
+  })
+})
+</script>
+
 <template>
   <div>
     <div
@@ -11,7 +21,7 @@
       </a>
 
       <div class="flex items-center">
-        <button class="w-6 h-6 text-base relative group">
+        <button id="sidebar-menu" class="w-6 h-6 text-base relative group">
           <span
             class="right-0 cursor-pointer bg-slate-400 group-hover:bg-indigo-700 h-[3px] w-full inline-block rounded absolute"
             :class="{

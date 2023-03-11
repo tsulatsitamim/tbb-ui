@@ -3,6 +3,10 @@ import AppNavbar from './AppNavbar.vue'
 import AppSidebar from './AppSidebar.vue'
 
 defineProps({
+  title: {
+    type: String,
+    default: 'Dashboard'
+  },
   settings: {
     type: Object,
     default() {
@@ -22,7 +26,7 @@ defineProps({
     <AppSidebar :title="settings.title" :menus="menus"></AppSidebar>
     <AppNavbar :title="settings.title"></AppNavbar>
     <div id="content" class="lg:pl-[265px] flex-grow flex flex-col">
-      <div class="py-4 px-6">Sub Header</div>
+      <div class="py-4 px-6">{{ title }}</div>
       <div class="px-6 flex-grow">
         <slot></slot>
       </div>

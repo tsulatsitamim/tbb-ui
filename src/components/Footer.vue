@@ -2,9 +2,9 @@
 
 <template>
   <div class="bg-white py-4 flex lg:flex-col">
-    <div class="container flex flex-col md:flex-row items-center justify-between">
-      <div class="text-black order-2 md:order-1">
-        <span class="font-bold mr-2">{{ new Date().getFullYear() }}</span>
+    <div class="container flex flex-col md:flex-row items-center justify-between px-4">
+      <div class="text-muted order-2 md:order-1">
+        <span class="font-semibold mr-2">{{ new Date().getFullYear() }}</span>
         <a href="/" class="hover:text-primary" @click.prevent>DTMI UGM</a>
       </div>
 

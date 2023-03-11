@@ -26,7 +26,7 @@ onMounted(() => {
     >
       <div class="h-16 px-6 flex items-center">
         <a href="/" class="flex items-center">
-          <img src="https://siadtmi.com/img/logo-ugm.3b61ee2b.png" class="h-7" alt="Logo" />
+          <img src="/img/logo.png" class="h-7" alt="Logo" />
           <span class="ml-3 text-base font-semibold text-indigo-500 hover:text-indigo-700">{{
             title
           }}</span>

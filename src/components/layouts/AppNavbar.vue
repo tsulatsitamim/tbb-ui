@@ -17,7 +17,7 @@ onMounted(() => {
       class="fixed lg:hidden top-0 left-0 right-0 bg-white h-14 shadow-[0_0_40px_0px_rgb(82,63,105,0.1)] flex items-center justify-between px-4"
     >
       <a href="/" class="flex items-center">
-        <img src="https://siadtmi.com/img/logo-ugm.3b61ee2b.png" class="h-7" alt="Logo" />
+        <img src="/img/logo.png" class="h-7" alt="Logo" />
         <span class="ml-3 text-base font-semibold text-indigo-500 hover:text-indigo-700">{{
           title
         }}</span>

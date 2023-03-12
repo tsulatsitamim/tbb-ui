@@ -32,27 +32,31 @@ const query = ref('')
 const sortField = ref('')
 const sortSort = ref('asc')
 
+const mapUnpaginatedData = (data: any[]) => {
+  const keys = props.table.columns.map((x) => x.field)
+  const filteredData = query.value
+    ? data.filter((row) =>
+      keys.some(
+        (key) =>
+          row[key] &&
+          JSON.stringify(row[key]).toLowerCase().includes(query.value.toLowerCase())
+      )
+    )
+    : data
+
+  rows.value = filteredData.slice(
+    (pagination.page - 1) * pagination.perpage,
+    pagination.page * pagination.perpage
+  )
+
+  pagination.pages = Math.ceil((filteredData.length || 1) / pagination.perpage)
+  pagination.total = filteredData.length
+}
+
 const fetchData = async () => {
   if (!props.table.url) {
     if (props.table.data) {
-      const keys = props.table.columns.map((x) => x.field)
-      const filteredData = query.value
-        ? props.table.data.filter((row) =>
-          keys.some(
-            (key) =>
-              row[key] &&
-              JSON.stringify(row[key]).toLowerCase().includes(query.value.toLowerCase())
-          )
-        )
-        : props.table.data
-
-      rows.value = filteredData.slice(
-        (pagination.page - 1) * pagination.perpage,
-        pagination.page * pagination.perpage
-      )
-
-      pagination.pages = Math.ceil((filteredData.length || 1) / pagination.perpage)
-      pagination.total = filteredData.length
+      mapUnpaginatedData(props.table.data)
     }
     return
   }
@@ -64,6 +68,12 @@ const fetchData = async () => {
       `${props.table.url}${props.table.url.includes('?') ? '&' : '?'}pagination[page]=${pagination.page
       }&pagination[perpage]=${pagination.perpage}&query=${query.value}`
     )
+
+    if (!data.meta) {
+      remoteLoading.value = false
+      return mapUnpaginatedData(data.data)
+    }
+
     rows.value = data.data
     // pagination.page = data.meta.page
     pagination.pages = Math.ceil((data.meta.total || 1) / data.meta.perpage)

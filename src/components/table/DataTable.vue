@@ -112,6 +112,8 @@ const updatePagination = (e: { page: number, perpage: number }) => {
   fetchData()
 }
 
+defineExpose({ fetchData })
+
 const sort = () => { }
 </script>
 

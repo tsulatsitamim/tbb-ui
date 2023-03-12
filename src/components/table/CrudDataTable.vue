@@ -4,6 +4,7 @@ import type { $Fetch } from "ofetch";
 import { ofetch } from "ofetch";
 import DataTable from './DataTable.vue';
 import { ref } from 'vue';
+import type { Ref } from 'vue';
 
 const props = withDefaults(defineProps<{
   table: DTable,
@@ -15,8 +16,8 @@ const props = withDefaults(defineProps<{
   }
 })
 
-
 const loading = ref(false)
+const dataTable: Ref<InstanceType<typeof DataTable> | null> = ref(null)
 
 const deleteItem = async (id: string | number) => {
   if (!window.confirm('Hapus item?')) {
@@ -26,6 +27,7 @@ const deleteItem = async (id: string | number) => {
   loading.value = true
   try {
     await props.ofetch(`${props.table.url}/${id}`, { method: "DELETE" })
+    dataTable.value?.fetchData()
   } catch (error) {
     alert('Mohon maaf ada gangguan sistem.')
   }
@@ -34,7 +36,7 @@ const deleteItem = async (id: string | number) => {
 </script>
 
 <template>
-  <DataTable :table="table">
+  <DataTable :table="table" ref="dataTable">
     <template #column(action)="{ data }">
       <div class="flex justify-center">
         <NuxtLink :to="`${crudPath}/${data.id}`"

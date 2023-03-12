@@ -2,6 +2,7 @@ export interface DTColumn {
   field: string
   title: string
   width?: number
+  class?: string
 }
 
 export interface DTable {

@@ -5,6 +5,15 @@ import type { Ref } from 'vue'
 import type { DTable } from './DataTable.spec'
 import Footer from './TableFooter.vue'
 
+type NV = <T>(item: any, arr: string[]) => T;
+const getNestedValue: NV = (item, arr) => {
+  if (arr.length === 1) {
+    return item[arr[0]]
+  }
+
+  return getNestedValue<NV>(item[arr.shift() as string], arr)
+}
+
 const props = defineProps<{
   table: DTable
   loading?: boolean
@@ -117,15 +126,19 @@ const sort = () => { }
       <table class="min-w-full" :class="(remoteLoading || loading) && 'pointer-events-none'">
         <thead>
           <tr class="border-b">
-            <th v-for="column in table.columns" :key="column.title" class="py-3 px-4 font-medium text-left" @click="sort">
+            <th v-for="column in table.columns" :key="column.title" class="py-3 px-5 font-medium text-left"
+              :class="column.class" @click="sort">
               {{ column.title }}
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="row in rows" :key="row.id" class="border-b last:border-b-0">
-            <td v-for="column in table.columns" :key="column.title" class="p-4">
-              {{ row[column.field] }}
+          <tr v-for="(row, i) in rows" :key="row.id" class="border-b last:border-b-0">
+            <td v-for="column in table.columns" :key="row.id + '_' + i + '_' + column.field" class="py-4 px-5"
+              :class="column.class">
+              <slot :name="`column(${column.field})`" :data="row">
+                {{ getNestedValue(row, column.field.split('.')) }}
+              </slot>
             </td>
           </tr>
         </tbody>

@@ -8,7 +8,8 @@ import { useRoute } from 'vue-router';
 
 const props = withDefaults(defineProps<{
   table: DTable,
-  ofetch?: $Fetch
+  ofetch?: $Fetch,
+  crudPath: string
 }>(), {
   ofetch() {
     return ofetch
@@ -37,7 +38,7 @@ const deleteItem = async (id: string | number) => {
   <DataTable :table="table">
     <template #column(action)="{ data }">
       <div class="flex justify-center">
-        <NuxtLink :to="`${useRoute().path}/${data.id}`"
+        <NuxtLink :to="`${crudPath}/${data.id}`"
           class="text-xs font-bold text-slate-500 shadow-none mr-3 hover:opacity-75">
           EDIT
         </NuxtLink>

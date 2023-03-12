@@ -4,6 +4,7 @@ import type { $Fetch } from "ofetch";
 import { ofetch } from "ofetch";
 import DataTable from './DataTable.vue';
 import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 const props = withDefaults(defineProps<{
   table: DTable,
@@ -26,8 +27,6 @@ const deleteItem = async (id: string | number) => {
   try {
     await props.ofetch(`${props.table.url}/${id}`, { method: "DELETE" })
   } catch (error) {
-    console.log(error);
-
     alert('Mohon maaf ada gangguan sistem.')
   }
   loading.value = false
@@ -38,7 +37,7 @@ const deleteItem = async (id: string | number) => {
   <DataTable :table="table">
     <template #column(action)="{ data }">
       <div class="flex justify-center">
-        <NuxtLink :to="`/tahun-ajaran/${data.id}`"
+        <NuxtLink :to="`${useRoute().path}/${data.id}`"
           class="text-xs font-bold text-slate-500 shadow-none mr-3 hover:opacity-75">
           EDIT
         </NuxtLink>

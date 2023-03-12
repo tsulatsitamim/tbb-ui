@@ -51,8 +51,6 @@ const fetchData = async () => {
         pagination.page * pagination.perpage
       )
 
-      console.log((pagination.page - 1) * pagination.perpage, pagination.perpage)
-
       pagination.pages = Math.ceil((filteredData.length || 1) / pagination.perpage)
       pagination.total = filteredData.length
     }

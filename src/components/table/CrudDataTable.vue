@@ -37,6 +37,9 @@ const deleteItem = async (id: string | number) => {
 
 <template>
   <DataTable :table="table" ref="dataTable">
+    <template #header>
+      <slot name="header"></slot>
+    </template>
     <template #column(action)="{ data }">
       <div class="flex justify-center">
         <NuxtLink :to="`${crudPath}/${data.id}`"

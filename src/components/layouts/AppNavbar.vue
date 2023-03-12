@@ -14,7 +14,7 @@ onMounted(() => {
 <template>
   <div>
     <div
-      class="fixed lg:hidden top-0 left-0 right-0 bg-white h-14 shadow-[0_0_40px_0px_rgb(82,63,105,0.1)] flex items-center justify-between px-4">
+      class="fixed lg:hidden top-0 left-0 right-0 bg-white h-14 shadow-[0_0_40px_0px_rgb(82,63,105,0.1)] flex items-center justify-between px-4 z-[90]">
       <a href="/" class="flex items-center">
         <img src="/img/logo.png" class="h-7" alt="Logo" />
         <span class="ml-3 text-base font-semibold text-indigo-500 hover:text-indigo-700">{{

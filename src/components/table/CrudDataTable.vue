@@ -4,7 +4,6 @@ import type { $Fetch } from "ofetch";
 import { ofetch } from "ofetch";
 import DataTable from './DataTable.vue';
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
 
 const props = withDefaults(defineProps<{
   table: DTable,

@@ -1,5 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useSidebarStore } from '@/stores/sidebar'
 
+const sidebarStore = useSidebarStore()
+
+const { toggleSidebar } = sidebarStore
+</script>
 <template>
   <div
     class="flex justify-between items-center fixed top-0 inset-x-0 z-[97] px-4 h-[55px] min-h-[55px] bg-white md:hidden"
@@ -10,7 +15,7 @@
     </a>
     <div class="flex items-center">
       <!--begin::Aside Mobile Toggle-->
-      <button class="hover:text-primary">
+      <button class="hover:text-primary" @click="toggleSidebar">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"

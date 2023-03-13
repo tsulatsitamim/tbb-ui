@@ -19,7 +19,7 @@ export const useSidebarStore = defineStore('sidebar', () => {
   }
 
   function hideSidebar() {
-    isExpandSidebar.value = false
+    isShowSidebarMobile.value = false
   }
 
   function expandSidebar() {

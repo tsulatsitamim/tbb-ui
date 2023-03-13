@@ -20,8 +20,6 @@ const localValue = ref('')
 
 const emit = defineEmits(['update:modelValue'])
 const update = (e: any) => {
-  console.log(e);
-
   emit('update:modelValue', e.target.value)
   localValue.value = e.target.value
 }

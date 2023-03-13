@@ -10,4 +10,5 @@ export interface DTable {
   data?: any[]
   columns: DTColumn[]
   disableInit?: boolean
+  mapper?: any
 }

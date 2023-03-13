@@ -47,7 +47,7 @@ const mapUnpaginatedData = (data: any[]) => {
   rows.value = filteredData.slice(
     (pagination.page - 1) * pagination.perpage,
     pagination.page * pagination.perpage
-  )
+  ).map(props.table.mapper ? props.table.mapper : (x) => x)
 
   pagination.pages = Math.ceil((filteredData.length || 1) / pagination.perpage)
   pagination.total = filteredData.length

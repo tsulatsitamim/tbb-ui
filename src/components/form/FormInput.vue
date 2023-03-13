@@ -18,14 +18,14 @@ defineEmits(['update:modelValue'])
     </label>
     <div>
       <input v-if="type !== 'file'" :value="modelValue" :type="type"
-        class="bg-white border border-gray-300 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        class="bg-white border border-gray-300 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2"
         :class="{
           'border-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500':
             error,
         }" :placeholder="placeholder || `Masukan ${label || 'Input'}`"
         @input="$emit('update:modelValue', $event.target.value)" />
       <input v-else type="file"
-        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2"
         :class="{
           'border-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500':
             error,

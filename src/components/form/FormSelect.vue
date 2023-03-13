@@ -33,7 +33,7 @@ const update = (e: any) => {
       <div class="select-wrapper relative">
         <select :value="modelValue"
           class="appearance-none border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full pl-3 pr-6 py-2"
-          :class="`${modelValue === '' || localValue === '' ? 'text-gray-300' : 'text-slate-700'} ${disabled ? 'bg-gray-100' : 'bg-white'
+          :class="`${modelValue === '' ? 'text-gray-300' : 'text-slate-700'} ${disabled ? 'bg-gray-100' : 'bg-white'
             } ${error &&
             'text-red-500 border-red-500 placeholder-red-700 focus:ring-red-500 focus:border-red-500'
             }`" :disabled="!!disabled" @input="update">

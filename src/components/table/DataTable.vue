@@ -151,6 +151,11 @@ const sort = () => { }
               </slot>
             </td>
           </tr>
+          <tr v-if="!rows.length" class="border-b last:border-b-0">
+            <td :colspan="table.columns.length" class="py-4 px-5 text-center">
+              No records found
+            </td>
+          </tr>
         </tbody>
       </table>
       <div v-if="remoteLoading || loading"

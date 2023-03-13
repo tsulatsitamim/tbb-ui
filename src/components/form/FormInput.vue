@@ -1,6 +1,6 @@
 <script setup>
 defineProps({
-  modelValue: { type: [String, Number, File], default: '' },
+  modelValue: { type: [String, Number, File, null], default: '' },
   label: { type: String, default: '' },
   placeholder: { type: String, default: '' },
   type: { type: String, default: 'text' },

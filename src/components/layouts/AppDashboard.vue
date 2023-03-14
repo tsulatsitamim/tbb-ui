@@ -32,7 +32,7 @@ defineProps({
           <slot name="toolbar"></slot>
         </div>
       </div>
-      <div class="px-5 lg:px-6 flex-grow">
+      <div class="px-5 lg:px-6 pb-8 flex-grow">
         <slot></slot>
       </div>
       <div class="bg-white py-3 px-6 text-right">

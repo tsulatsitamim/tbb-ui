@@ -26,8 +26,8 @@ defineProps({
     <AppSidebar :title="settings.title" :menus="menus"></AppSidebar>
     <AppNavbar :title="settings.title"></AppNavbar>
     <div id="content" class="lg:pl-[265px] flex-grow flex flex-col">
-      <div class="pt-5 pb-4 px-5 lg:pb-5 lg:pt-7 lg:px-6 flex justify-between items-center w-full">
-        <div class="font-medium"> {{ title }}</div>
+      <div class="pt-5 pb-4 px-5 lg:pb-4 lg:pt-6 lg:px-6 flex justify-between items-center w-full">
+        <div class="font-medium text-base"> {{ title }}</div>
         <div>
           <slot name="toolbar"></slot>
         </div>

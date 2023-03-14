@@ -43,10 +43,10 @@ const deleteItem = async (id: string | number) => {
     <template #column(action)="{ data }">
       <div class="flex justify-center">
         <NuxtLink :to="`${crudPath}/${data.id}`"
-          class="text-xs font-bold text-slate-500 shadow-none mr-3 hover:opacity-75">
+          class="text-xs font-bold text-blue-500 shadow-none mr-3 hover:opacity-75">
           EDIT
         </NuxtLink>
-        <button class="text-xs font-bold text-slate-500 shadow-none hover:opacity-75" @click="deleteItem(data.id)">
+        <button class="text-xs font-bold text-blue-500 shadow-none hover:opacity-75" @click="deleteItem(data.id)">
           HAPUS
         </button>
       </div>

@@ -11,4 +11,5 @@ export interface DTable {
   columns: DTColumn[]
   disableInit?: boolean
   mapper?: any
+  search?: boolean
 }

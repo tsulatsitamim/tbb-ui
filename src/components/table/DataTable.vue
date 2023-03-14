@@ -120,7 +120,7 @@ const sort = () => { }
 <template>
   <div class="bg-white py-5 px-6 lg:py-6 lg:px-7 rounded-md">
     <div class="md:flex mb-8">
-      <div class="md:w-72 mb-5 md:mb-0">
+      <div v-if="table.search !== false" class="md:w-72 mb-5 md:mb-0">
         <div class="w-full border border-gray-300 py-2 px-3 rounded-md flex items-center">
           <svg fill="none" stroke="currentColor" class="text-gray-400 h-5 mr-2" stroke-width="1.5" viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

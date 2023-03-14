@@ -21,8 +21,8 @@ defineEmits(['click'])
 
 
 <template>
-  <button class="rounded-md hover:brightness-90 font-semibold inline-flex items-center" :class="`${colors[color]} ${(loading || disabled) && 'opacity-60 cursor-not-allowed disabled'
-    } ${compact ? 'px-3 py-2 text-sm' : 'px-5 py-3 '}`" :disabled="!!loading" @click="$emit('click')">
+  <button class="rounded-md hover:brightness-90 font-medium inline-flex items-center px-3.5 py-2.5 text-xs" :class="`${colors[color]} ${(loading || disabled) && 'opacity-60 cursor-not-allowed disabled'
+    }`" :disabled="!!loading" @click="$emit('click')">
     <div class="relative flex items-center" :class="`${loading && 'pl-5'}`">
       <!-- TODO: SVG Loading For Campact -->
       <svg v-if="loading" class="animate-spin h-5 w-5 text-white absolute -left-1" xmlns="http://www.w3.org/2000/svg"

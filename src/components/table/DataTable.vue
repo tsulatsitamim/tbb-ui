@@ -7,6 +7,10 @@ import Footer from './TableFooter.vue'
 
 type NV = <T>(item: any, arr: string[]) => T;
 const getNestedValue: NV = (item, arr) => {
+  if (!item) {
+    return ''
+  }
+
   if (arr.length === 1) {
     return item[arr[0]]
   }

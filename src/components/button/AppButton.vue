@@ -1,15 +1,4 @@
 <script setup lang="ts">
-withDefaults(defineProps<{
-  label?: string
-  color?: 'primary' | 'danger' | 'secondary'
-  loading?: boolean | number
-  disabled?: boolean | number
-  compact?: boolean | number
-}>(), {
-  label: 'Simpan',
-  color: 'primary',
-})
-
 const colors = {
   primary: 'bg-indigo-500 text-white',
   danger: 'bg-rose-500 text-white',
@@ -17,6 +6,17 @@ const colors = {
   secondary: 'bg-slate-200',
   'outline-secondary': 'bg-white border border-gray-300',
 }
+
+withDefaults(defineProps<{
+  label?: string
+  color?: keyof typeof colors
+  loading?: boolean | number
+  disabled?: boolean | number
+  compact?: boolean | number
+}>(), {
+  label: 'Simpan',
+  color: 'primary',
+})
 
 defineEmits(['click'])
 </script>

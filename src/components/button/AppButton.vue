@@ -15,7 +15,7 @@ const colors = {
   danger: 'bg-rose-500 text-white',
   warning: 'bg-yellow-500',
   secondary: 'bg-slate-200',
-  'outline-econdary': 'bg-white border border-gray-300',
+  'outline-secondary': 'bg-white border border-gray-300',
 }
 
 defineEmits(['click'])

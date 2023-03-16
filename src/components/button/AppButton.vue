@@ -13,7 +13,9 @@ withDefaults(defineProps<{
 const colors = {
   primary: 'bg-indigo-500 text-white',
   danger: 'bg-rose-500 text-white',
+  warning: 'bg-yellow-500',
   secondary: 'bg-slate-200',
+  'outline-econdary': 'bg-white border border-gray-300',
 }
 
 defineEmits(['click'])
@@ -21,7 +23,7 @@ defineEmits(['click'])
 
 
 <template>
-  <button class="rounded-md hover:brightness-90 font-medium inline-flex items-center px-3.5 py-2.5 text-xs" :class="`${colors[color]} ${(loading || disabled) && 'opacity-60 cursor-not-allowed disabled'
+  <button class="rounded-md hover:brightness-95 font-medium inline-flex items-center px-3.5 py-2.5 text-xs" :class="`${colors[color]} ${(loading || disabled) && 'opacity-60 cursor-not-allowed disabled'
     }`" :disabled="!!loading" @click="$emit('click')">
     <div class="relative flex items-center" :class="`${loading && 'pl-5'}`">
       <!-- TODO: SVG Loading For Campact -->

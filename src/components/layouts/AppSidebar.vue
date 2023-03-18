@@ -57,7 +57,7 @@ onMounted(() => {
             </li>
 
             <li class="hover:bg-slate-100 group hover:text-indigo-600">
-              <button class="flex items-center gap-3 px-6 py-3 w-full" @click="emit('logout')">
+              <button class="flex items-center gap-3 px-6 py-3 w-full" @click="$emit('logout')">
                 <div>
                   <component :is="menus[0].icon" class="h-5 fill-[#c4cff9] group-hover:fill-[#5867dd]">
                   </component>

@@ -19,11 +19,13 @@ defineProps({
     type: Array
   }
 })
+
+defineEmits(['logout'])
 </script>
 
 <template>
   <div class="h-full flex flex-col">
-    <AppSidebar :title="settings.title" :menus="menus"></AppSidebar>
+    <AppSidebar :title="settings.title" :menus="menus" @logout="emit('logout')"></AppSidebar>
     <AppNavbar :title="settings.title"></AppNavbar>
     <div id="content" class="lg:pl-[265px] flex-grow flex flex-col">
       <div class="pt-5 pb-4 px-5 lg:pb-4 lg:pt-6 lg:px-6 flex justify-between items-center w-full">

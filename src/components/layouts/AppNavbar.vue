@@ -1,7 +1,8 @@
 <script setup>
 import { onMounted } from 'vue'
 defineProps({
-  title: { type: String, default: 'TBB UI' }
+  title: { type: String, default: 'TBB UI' },
+  userName: { type: String, default: 'Admin' }
 })
 
 onMounted(() => {
@@ -44,7 +45,7 @@ onMounted(() => {
         class="text-gray-700 hidden lg:flex fixed top-0 left-64 right-0 h-16 bg-white justify-end px-6 shadow-[0_0_40px_0px_rgb(82,63,105,0.1)]">
         <div class="flex items-center">
           <div class="h-11 hover:bg-slate-100 flex items-center px-2 rounded-md cursor-pointer text-slate-400">
-            Hi,&nbsp;<span class="font-semibold text-slate-500">Tsulatsi Tamim</span>
+            Hi,&nbsp;<span class="font-semibold text-slate-500">{{ userName }}</span>
           </div>
         </div>
       </div>

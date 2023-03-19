@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// to use this component data from array or server should have unique ID
+
 import axios from 'axios'
 import { onMounted, reactive, ref, watch } from 'vue'
 import type { Ref } from 'vue'
@@ -23,6 +25,11 @@ const props = defineProps<{
   loading?: boolean
 }>()
 
+const computedTable = {
+  select: false,
+  ...props.table
+}
+
 const pagination = reactive({
   page: 1,
   pages: 1,
@@ -35,10 +42,12 @@ const remoteLoading = ref(false)
 const query = ref('')
 const sortField = ref('')
 const sortSort = ref('asc')
+const checkedRows: Ref<(string | number)[]> = ref([])
+const filteredData: Ref<any[]> = ref([])
 
 const mapUnpaginatedData = (data: any[]) => {
   const keys = props.table.columns.map((x) => x.field)
-  const filteredData = query.value
+  filteredData.value = query.value
     ? data.filter((row) =>
       keys.some(
         (key) =>
@@ -48,13 +57,13 @@ const mapUnpaginatedData = (data: any[]) => {
     )
     : data
 
-  rows.value = filteredData.slice(
+  rows.value = filteredData.value.slice(
     (pagination.page - 1) * pagination.perpage,
     pagination.page * pagination.perpage
   ).map(props.table.mapper ? props.table.mapper : (x) => x)
 
-  pagination.pages = Math.ceil((filteredData.length || 1) / pagination.perpage)
-  pagination.total = filteredData.length
+  pagination.pages = Math.ceil((filteredData.value.length || 1) / pagination.perpage)
+  pagination.total = filteredData.value.length
 }
 
 const fetchData = async () => {
@@ -116,9 +125,17 @@ const updatePagination = (e: { page: number, perpage: number }) => {
   fetchData()
 }
 
-defineExpose({ fetchData })
+defineExpose({ fetchData, checkedRows })
 
 const sort = () => { }
+const checkAll = (e: any) => {
+  if (e.target.checked) {
+    checkedRows.value = filteredData.value.map(x => x.id)
+  } else {
+    checkedRows.value = []
+  }
+}
+
 </script>
 
 <template>
@@ -140,6 +157,10 @@ const sort = () => { }
       <table class="min-w-full" :class="(remoteLoading || loading) && 'pointer-events-none'">
         <thead>
           <tr class="border-b">
+            <th v-if="computedTable.select" class="w-4">
+              <input type="checkbox" @input="checkAll"
+                class="mt-1 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
+            </th>
             <th v-for="column in table.columns" :key="column.title" class="py-3 px-5 font-medium text-left"
               :class="column.class" @click="sort">
               {{ column.title }}
@@ -148,6 +169,10 @@ const sort = () => { }
         </thead>
         <tbody>
           <tr v-for="(row, i) in rows" :key="row.id" class="border-b last:border-b-0">
+            <th v-if="computedTable.select">
+              <input v-model="checkedRows" type="checkbox" :value="row.id"
+                class="mt-1 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
+            </th>
             <td v-for="column in table.columns" :key="row.id + '_' + i + '_' + column.field" class="py-4 px-5"
               :class="column.class">
               <slot :name="`column(${column.field})`" :data="row">
@@ -179,6 +204,19 @@ const sort = () => { }
 </template>
 
 <style scoped>
+[type=checkbox],
+[type=radio] {
+  appearance: none;
+  background-color: #fff;
+  border-color: #6b7280;
+  border-width: 1px;
+}
+
+[type=checkbox]:checked {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L6.5 9.086l4.293-4.293a1 1 0 0 1 1.414 0z'/%3E%3C/svg%3E");
+  background-color: currentColor;
+}
+
 .shadow-all {
   box-shadow: 0 0 50px 0 rgb(82 63 105 / 15%);
 }

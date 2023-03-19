@@ -33,6 +33,10 @@ const deleteItem = async (id: string | number) => {
   }
   loading.value = false
 }
+
+defineExpose({
+  dataTable
+})
 </script>
 
 <template>

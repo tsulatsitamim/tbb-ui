@@ -26,7 +26,7 @@ const props = defineProps<{
 }>()
 
 const computedTable = {
-  select: false,
+  checkbox: false,
   ...props.table
 }
 
@@ -157,7 +157,7 @@ const checkAll = (e: any) => {
       <table class="min-w-full" :class="(remoteLoading || loading) && 'pointer-events-none'">
         <thead>
           <tr class="border-b">
-            <th v-if="computedTable.select" class="w-4">
+            <th v-if="computedTable.checkbox" class="w-4">
               <input type="checkbox" @input="checkAll"
                 class="mt-1 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
             </th>
@@ -169,7 +169,7 @@ const checkAll = (e: any) => {
         </thead>
         <tbody>
           <tr v-for="(row, i) in rows" :key="row.id" class="border-b last:border-b-0">
-            <th v-if="computedTable.select">
+            <th v-if="computedTable.checkbox">
               <input v-model="checkedRows" type="checkbox" :value="row.id"
                 class="mt-1 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
             </th>

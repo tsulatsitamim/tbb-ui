@@ -43,6 +43,7 @@ const query = ref('')
 const sortField = ref('')
 const sortSort = ref('asc')
 const checkedRows: Ref<(string | number)[]> = ref([])
+const checkedAll = ref(false)
 const filteredData: Ref<any[]> = ref([])
 
 const mapUnpaginatedData = (data: any[]) => {
@@ -125,13 +126,20 @@ const updatePagination = (e: { page: number, perpage: number }) => {
   fetchData()
 }
 
-defineExpose({ fetchData, checkedRows })
+const clearCheckedRows = () => {
+  checkedAll.value = false
+  checkedRows.value = []
+}
+
+defineExpose({ fetchData, checkedRows, clearCheckedRows })
 
 const sort = () => { }
 const checkAll = (e: any) => {
   if (e.target.checked) {
+    checkedAll.value = true
     checkedRows.value = filteredData.value.map(x => x.id)
   } else {
+    checkedAll.value = false
     checkedRows.value = []
   }
 }
@@ -158,7 +166,7 @@ const checkAll = (e: any) => {
         <thead>
           <tr class="border-b">
             <th v-if="computedTable.checkbox" class="w-4">
-              <input type="checkbox" @input="checkAll"
+              <input type="checkbox" @input="checkAll" :checked="checkedAll"
                 class="mt-1 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
             </th>
             <th v-for="column in table.columns" :key="column.title" class="py-3 px-5 font-medium text-left"

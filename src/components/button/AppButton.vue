@@ -3,6 +3,7 @@ const colors = {
   primary: 'bg-indigo-500 text-white',
   danger: 'bg-rose-500 text-white',
   warning: 'bg-yellow-500',
+  success: 'bg-green-500 text-white',
   secondary: 'bg-slate-200',
   'outline-secondary': 'bg-white border border-gray-300',
 }

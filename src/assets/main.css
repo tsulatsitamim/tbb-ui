@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-@import './tailwind.css';
 
 html,
 body,
@@ -7,4 +6,9 @@ body > div {
   font-family: 'Poppins', sans-serif;
   height: 100%;
   color: #3f4254;
+}
+
+body {
+  font-size: 0.8125rem;
+  background-color: #eef0f8;
 }

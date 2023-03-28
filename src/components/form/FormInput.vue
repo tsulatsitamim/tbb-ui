@@ -10,7 +10,7 @@ withDefaults(defineProps<{
   modelValue: '',
   label: '',
   placeholder: '',
-  type: '',
+  type: 'text',
   error: '',
   help: '',
 })

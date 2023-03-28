@@ -1,18 +1,13 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
-  modelValue: string | number | null | undefined | File
+  modelValue?: string | number | null | File
   label: string,
-  placeholder: string,
-  type: string,
-  error: string,
-  help: string,
+  placeholder?: string,
+  type?: string,
+  error?: string,
+  help?: string,
 }>(), {
-  modelValue: '',
-  label: '',
-  placeholder: '',
   type: 'text',
-  error: '',
-  help: '',
 })
 
 defineEmits(['update:modelValue'])

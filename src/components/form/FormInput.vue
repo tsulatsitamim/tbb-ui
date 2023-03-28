@@ -1,11 +1,18 @@
-<script setup>
-defineProps({
-  modelValue: { type: [String, Number, File, null], default: '' },
-  label: { type: String, default: '' },
-  placeholder: { type: String, default: '' },
-  type: { type: String, default: 'text' },
-  error: { type: String, default: '' },
-  help: { type: String, default: '' },
+<script setup lang="ts">
+withDefaults(defineProps<{
+  modelValue: string | number | null | undefined | File
+  label: string,
+  placeholder: string,
+  type: string,
+  error: string,
+  help: string,
+}>(), {
+  modelValue: '',
+  label: '',
+  placeholder: '',
+  type: '',
+  error: '',
+  help: '',
 })
 
 defineEmits(['update:modelValue'])
@@ -23,13 +30,13 @@ defineEmits(['update:modelValue'])
           'border-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500':
             error,
         }" :placeholder="placeholder || `Masukan ${label || 'Input'}`"
-        @input="$emit('update:modelValue', $event.target.value)" />
+        @input="$emit('update:modelValue', ($event!.target as HTMLInputElement).value)" />
       <input v-else type="file"
         class="bg-gray-50 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2"
         :class="{
           'border-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500':
             error,
-        }" @input="$emit('update:modelValue', $event.target.files[0])" />
+        }" @input="$emit('update:modelValue', ($event!.target as HTMLInputElement).files![0])" />
       <p v-if="error" class="mt-2 text-sm text-red-600">
         {{ error }}
       </p>

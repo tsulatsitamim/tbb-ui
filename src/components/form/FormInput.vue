@@ -1,7 +1,7 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
   modelValue?: string | number | null | File
-  label: string,
+  label?: string,
   placeholder?: string,
   type?: string,
   error?: string,
@@ -15,7 +15,7 @@ defineEmits(['update:modelValue'])
 
 <template>
   <div>
-    <label class="mb-1 ml-1 text-slate-700 block">
+    <label v-if="label" class="mb-1 ml-1 text-slate-700 block">
       {{ label }}
     </label>
     <div>

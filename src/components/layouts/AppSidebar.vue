@@ -44,17 +44,19 @@ onMounted(() => {
       <div>
         <div class="my-3">
           <ul class="text-gray-700">
-            <li v-for="menu in menus" :key="menu.path" class="hover:bg-slate-100 group hover:text-indigo-600"
-              :class="(route.path === menu.path || (menu.path !== '/' && route.path.includes(menu.path))) && 'bg-slate-100 text-indigo-600'">
-              <RouterLink :to="menu.path" class="flex items-center gap-3 px-6 py-3" @click="closeSidebar">
-                <div>
-                  <component :is="menu.icon" class="h-5 fill-[#c4cff9] group-hover:fill-[#5867dd]"
-                    :class="(route.path === menu.path || (menu.path !== '/' && route.path.includes(menu.path))) && 'fill-[#5867dd]'">
-                  </component>
-                </div>
-                <div class="pt-1">{{ menu.name }}</div>
-              </RouterLink>
-            </li>
+            <template v-for="menu in menus" :key="menu.path">
+              <li v-if="menu.show === undefined || menu.show" class="hover:bg-slate-100 group hover:text-indigo-600"
+                :class="(route.path === menu.path || (menu.path !== '/' && route.path.includes(menu.path))) && 'bg-slate-100 text-indigo-600'">
+                <RouterLink :to="menu.path" class="flex items-center gap-3 px-6 py-3" @click="closeSidebar">
+                  <div>
+                    <component :is="menu.icon" class="h-5 fill-[#c4cff9] group-hover:fill-[#5867dd]"
+                      :class="(route.path === menu.path || (menu.path !== '/' && route.path.includes(menu.path))) && 'fill-[#5867dd]'">
+                    </component>
+                  </div>
+                  <div class="pt-1">{{ menu.name }}</div>
+                </RouterLink>
+              </li>
+            </template>
 
             <li class="hover:bg-slate-100 group hover:text-indigo-600">
               <button class="flex items-center gap-3 px-6 py-3 w-full" @click="$emit('logout')">

@@ -26,7 +26,7 @@ const deleteItem = async (id: string | number) => {
 
   loading.value = true
   try {
-    await props.ofetch(`${props.table.url}/${id}`, { method: "DELETE" })
+    await props.ofetch(`${props.table.url?.split('?')[0]}/${id}`, { method: "DELETE" })
     dataTable.value?.fetchData()
   } catch (error) {
     alert('Mohon maaf ada gangguan sistem.')

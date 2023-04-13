@@ -6,6 +6,7 @@ withDefaults(defineProps<{
   type?: string,
   error?: string,
   help?: string,
+  accept?: string,
 }>(), {
   type: 'text',
 })
@@ -26,7 +27,7 @@ defineEmits(['update:modelValue'])
             error,
         }" :placeholder="placeholder || `Masukan ${label || 'Input'}`"
         @input="$emit('update:modelValue', ($event!.target as HTMLInputElement).value)" />
-      <input v-else type="file"
+      <input v-else type="file" :accept="accept"
         class="bg-gray-50 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2"
         :class="{
           'border-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500':

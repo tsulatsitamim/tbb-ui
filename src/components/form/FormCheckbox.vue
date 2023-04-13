@@ -3,9 +3,9 @@ import { computed } from 'vue';
 
 const props = defineProps<{
     label: String
-    value: Boolean | Object
-    modelValue: Array<any> | Boolean
-    id: string
+    value?: Boolean | Object
+    modelValue?: Array<any> | Boolean
+    id?: string
 }>()
 const emit = defineEmits(["update:modelValue"]);
 const model = computed({

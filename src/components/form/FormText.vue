@@ -22,13 +22,13 @@ defineEmits(['update:modelValue'])
       <textarea :value="modelValue as any"
         class="bg-white border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         :placeholder="placeholder || `Masukan ${label || 'Input'}`" :class="{
-          'border-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500':
-            error,
-        }" :rows="rows" @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)" />
-      <p v-if="error" class="mt-1 text-sm text-red-600 dark:text-red-500">
+            'border-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500':
+              error,
+          }" :rows="rows" @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)" />
+      <p v-if="error" class="mt-1 text-xs text-red-600 dark:text-red-500">
         {{ error }}
       </p>
-      <p v-if="help" class="mt-1 text-sm text-gray-400">
+      <p v-if="help" class="mt-1 text-xs text-gray-400">
         {{ help }}
       </p>
     </div>

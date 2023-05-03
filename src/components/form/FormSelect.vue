@@ -45,7 +45,7 @@ const update = (e: any) => {
             {{ item.name }}
           </option>
         </select>
-        <p v-if="error" class="mt-2 text-sm text-red-600 dark:text-red-500">
+        <p v-if="error" class="mt-2 text-xs text-red-600 dark:text-red-500">
           {{ error }}
         </p>
 

@@ -12,4 +12,5 @@ export interface DTable {
   disableInit?: boolean
   mapper?: any
   search?: boolean
+  headers?: any
 }

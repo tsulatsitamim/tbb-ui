@@ -80,7 +80,7 @@ const fetchData = async () => {
   try {
     const { data } = await axios.get(
       `${props.table.url}${props.table.url.includes('?') ? '&' : '?'}pagination[page]=${pagination.page
-      }&pagination[perpage]=${pagination.perpage}&query=${query.value}`
+      }&pagination[perpage]=${pagination.perpage}&query=${query.value}`, { headers: props.table.headers || {} }
     )
 
     if (!data.meta) {

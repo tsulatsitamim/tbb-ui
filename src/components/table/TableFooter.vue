@@ -35,6 +35,7 @@ const setActivePage = (page: number) => {
 
 const setPerpage = (n: number) => {
   perpage.value = n
+  activePage.value = 1
   emitUpdate()
 }
 
@@ -59,11 +60,10 @@ const nextPage = () => {
 <template>
   <div class="flex flex-wrap gap-5 justify-between mt-5">
     <div class="flex gap-2">
-      <button class="h-7 w-7 bg-slate-100 rounded-md flex items-center justify-center" :class="
-        activePage === 1
-          ? 'cursor-default opacity-60'
-          : 'hover:bg-indigo-500 hover:text-white'
-      " :disabled="activePage === 1" @click="setActivePage(1)">
+      <button class="h-7 w-7 bg-slate-100 rounded-md flex items-center justify-center" :class="activePage === 1
+        ? 'cursor-default opacity-60'
+        : 'hover:bg-indigo-500 hover:text-white'
+        " :disabled="activePage === 1" @click="setActivePage(1)">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-5 h-5 fill-gray-400">
           <path fill-rule="evenodd"
             d="M15.79 14.77a.75.75 0 01-1.06.02l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 111.04 1.08L11.832 10l3.938 3.71a.75.75 0 01.02 1.06zm-6 0a.75.75 0 01-1.06.02l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 111.04 1.08L5.832 10l3.938 3.71a.75.75 0 01.02 1.06z"
@@ -71,11 +71,10 @@ const nextPage = () => {
         </svg>
       </button>
 
-      <button class="h-7 w-7 bg-slate-100 rounded-md flex items-center justify-center" :class="
-        activePage === 1
-          ? 'cursor-default opacity-60'
-          : 'hover:bg-indigo-500 hover:text-white'
-      " :disabled="activePage === 1" @click="prevPage">
+      <button class="h-7 w-7 bg-slate-100 rounded-md flex items-center justify-center" :class="activePage === 1
+        ? 'cursor-default opacity-60'
+        : 'hover:bg-indigo-500 hover:text-white'
+        " :disabled="activePage === 1" @click="prevPage">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-5 h-5 fill-gray-400">
           <path fill-rule="evenodd"
             d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
@@ -88,11 +87,10 @@ const nextPage = () => {
         {{ page }}
       </button>
 
-      <button class="h-7 w-7 bg-slate-100 rounded-md flex items-center justify-center" :class="
-        activePage === pagination.pages
-          ? 'cursor-default opacity-60'
-          : 'hover:bg-indigo-500 hover:text-white'
-      " :disabled="activePage === pagination.pages" @click="nextPage">
+      <button class="h-7 w-7 bg-slate-100 rounded-md flex items-center justify-center" :class="activePage === pagination.pages
+        ? 'cursor-default opacity-60'
+        : 'hover:bg-indigo-500 hover:text-white'
+        " :disabled="activePage === pagination.pages" @click="nextPage">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-5 h-5 fill-gray-400">
           <path fill-rule="evenodd"
             d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
@@ -100,11 +98,10 @@ const nextPage = () => {
         </svg>
       </button>
 
-      <button class="h-7 w-7 bg-slate-100 rounded-md flex items-center justify-center" :class="
-        activePage === pagination.pages
-          ? 'cursor-default opacity-60'
-          : 'hover:bg-indigo-500 hover:text-white'
-      " :disabled="activePage === pagination.pages" @click="setActivePage(pagination.pages)">
+      <button class="h-7 w-7 bg-slate-100 rounded-md flex items-center justify-center" :class="activePage === pagination.pages
+        ? 'cursor-default opacity-60'
+        : 'hover:bg-indigo-500 hover:text-white'
+        " :disabled="activePage === pagination.pages" @click="setActivePage(pagination.pages)">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-5 h-5 fill-gray-400">
           <path fill-rule="evenodd"
             d="M10.21 14.77a.75.75 0 01.02-1.06L14.168 10 10.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
@@ -115,6 +112,7 @@ const nextPage = () => {
         </svg>
       </button>
     </div>
+    {{ pagination }}
     <div class="flex items-center space-x-5">
       <button
         class="flex items-center justify-between w-[4.5rem] bg-slate-100 px-3 h-7 rounded-md relative focus:pointer-events-nonex hover:bg-indigo-500 hover:text-white focus:bg-indigo-500 focus:text-white"

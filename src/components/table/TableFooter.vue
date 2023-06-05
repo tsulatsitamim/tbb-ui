@@ -112,7 +112,6 @@ const nextPage = () => {
         </svg>
       </button>
     </div>
-    {{ pagination }}
     <div class="flex items-center space-x-5">
       <button
         class="flex items-center justify-between w-[4.5rem] bg-slate-100 px-3 h-7 rounded-md relative focus:pointer-events-nonex hover:bg-indigo-500 hover:text-white focus:bg-indigo-500 focus:text-white"

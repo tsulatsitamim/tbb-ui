@@ -6,6 +6,8 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import type { Ref } from 'vue'
 import type { DTable } from './DataTable.spec'
 import Footer from './TableFooter.vue'
+import IconArrowUp from '../icons/IconArrowUp.vue'
+import IconArrowDown from '../icons/IconArrowDown.vue'
 
 type NV = <T>(item: any, arr: string[]) => T;
 const getNestedValue: NV = (item, arr) => {
@@ -41,7 +43,7 @@ const rows: Ref<any[]> = ref([])
 const remoteLoading = ref(false)
 const query = ref('')
 const sortField = ref('')
-const sortSort = ref('asc')
+const sortOrder = ref('asc')
 const checkedRows: Ref<(string | number)[]> = ref([])
 const checkedAll = ref(false)
 const filteredData: Ref<any[]> = ref([])
@@ -80,7 +82,7 @@ const fetchData = async () => {
   try {
     const { data } = await axios.get(
       `${props.table.url}${props.table.url.includes('?') ? '&' : '?'}pagination[page]=${pagination.page
-      }&pagination[perpage]=${pagination.perpage}&query=${query.value}`, { headers: props.table.headers || {} }
+      }&pagination[perpage]=${pagination.perpage}&sort[field]=${sortField.value}&sort[order]=${sortOrder.value}&query=${query.value}`, { headers: props.table.headers || {} }
     )
 
     if (!data.meta) {
@@ -133,7 +135,12 @@ const clearCheckedRows = () => {
 
 defineExpose({ fetchData, checkedRows, clearCheckedRows })
 
-const sort = () => { }
+const sort = (field: string) => {
+  sortField.value = field
+  sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc'
+  fetchData()
+}
+
 const checkAll = (e: any) => {
   if (e.target.checked) {
     checkedAll.value = true
@@ -169,9 +176,15 @@ const checkAll = (e: any) => {
               <input type="checkbox" @input="checkAll" :checked="checkedAll"
                 class="mt-1 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
             </th>
-            <th v-for="column in table.columns" :key="column.title" class="py-3 px-5 font-medium text-left"
-              :class="column.class" @click="sort">
-              {{ column.title }}
+            <th v-for="column in table.columns" :key="column.title" class="py-3 px-5 font-medium text-left cursor-pointer"
+              :class="column.class" @click="sort(column.field)">
+              <div class="flex gap-2">
+                {{ column.title }}
+                <template v-if="column.field === sortField">
+                  <IconArrowUp v-if="sortOrder === 'asc'" class="w-3 text-indigo-700"></IconArrowUp>
+                  <IconArrowDown v-else class="w-3 text-indigo-700"></IconArrowDown>
+                </template>
+              </div>
             </th>
           </tr>
         </thead>

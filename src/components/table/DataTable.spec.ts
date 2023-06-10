@@ -3,6 +3,7 @@ export interface DTColumn {
   title: string
   width?: number
   class?: string
+  sortable?: boolean
 }
 
 export interface DTable {

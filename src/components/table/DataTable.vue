@@ -176,15 +176,14 @@ const checkAll = (e: any) => {
               <input type="checkbox" @input="checkAll" :checked="checkedAll"
                 class="mt-1 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">
             </th>
-            <th v-for="column in table.columns" :key="column.title" class="py-3 px-5 font-medium text-left cursor-pointer"
-              :class="column.class" @click="sort(column.field)">
-              <div class="flex gap-2">
-                {{ column.title }}
-                <template v-if="column.field === sortField">
-                  <IconArrowUp v-if="sortOrder === 'asc'" class="w-3 text-indigo-700"></IconArrowUp>
-                  <IconArrowDown v-else class="w-3 text-indigo-700"></IconArrowDown>
-                </template>
-              </div>
+            <th v-for="column in table.columns" :key="column.title" class="py-3 px-5 font-medium text-left"
+              :class="[column.class, column.sortable === false ? 'pointer-events-none' : 'cursor-pointer']"
+              @click="sort(column.field)">
+              {{ column.title }}
+              <template v-if="column.field === sortField">
+                <IconArrowUp v-if="sortOrder === 'asc'" class="w-3 text-indigo-700 inline"></IconArrowUp>
+                <IconArrowDown v-else class="w-3 text-indigo-700 inline"></IconArrowDown>
+              </template>
             </th>
           </tr>
         </thead>

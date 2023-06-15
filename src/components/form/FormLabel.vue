@@ -8,7 +8,7 @@ defineEmits(['input'])
 
 <template>
   <div>
-    <label v-if="label" class="tw-mb-2 tw-ml-1 tw-text-slate-700 tw-block">
+    <label v-if="label" class="mb-1 ml-1 text-slate-700 block">
       {{ label }}
     </label>
     <div>

@@ -8,9 +8,11 @@ const props = withDefaults(defineProps<{
     modelValue?: string | number | any[]
     items?: any[]
     multiple?: boolean
+    error?: string
 }>(), {
     label: '',
     placeholder: '',
+    error: '',
     multiple: false,
     items() {
         return []
@@ -106,7 +108,8 @@ onMounted(() => {
     <FormLabel :label="label">
         <div :id="id">
             <div ref="container"
-                class="appearance-none border border-gray-300 rounded-md focus:outline-none block w-full pl-3 pr-6 py-2 text-slate-700 bg-white relative">
+                class="appearance-none border border-gray-300 rounded-md focus:outline-none block w-full pl-3 pr-6 py-2 text-slate-700 bg-white relative"
+                :class="error && 'text-red-500 border-red-500 placeholder-red-700 focus:ring-red-500 focus:border-red-500'">
                 <div class="absolute inset-0" @click="popup = true">
                     <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -115,7 +118,7 @@ onMounted(() => {
                     </svg>
                 </div>
 
-                <div v-if="!multiple" :class="!selectedItems[0] && 'text-gray-400'">
+                <div v-if="!multiple" :class="[!selectedItems[0] && 'text-gray-400', error && 'text-red-500']">
                     {{ selectedItems[0] ? selectedItems[0].name : (placeholder || `Pilih ${label || 'Item'}`) }}
                 </div>
                 <!-- 
@@ -164,5 +167,8 @@ onMounted(() => {
                 </div>
             </div>
         </div>
+        <p v-if="error" class="mt-2 text-xs text-red-600 dark:text-red-500">
+            {{ error }}
+        </p>
     </FormLabel>
 </template>

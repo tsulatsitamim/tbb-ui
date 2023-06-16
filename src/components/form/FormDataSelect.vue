@@ -8,6 +8,7 @@ const props = withDefaults(defineProps<{
     modelValue?: string | number | any[]
     items?: any[]
     multiple?: boolean
+    disabled?: boolean
     error?: string
 }>(), {
     label: '',
@@ -17,6 +18,7 @@ const props = withDefaults(defineProps<{
     items() {
         return []
     },
+    disabled: false
 })
 const emit = defineEmits(['update:modelValue'])
 
@@ -108,8 +110,8 @@ onMounted(() => {
     <FormLabel :label="label">
         <div :id="id">
             <div ref="container"
-                class="appearance-none border border-gray-300 rounded-md focus:outline-none block w-full pl-3 pr-6 py-2 text-slate-700 bg-white relative"
-                :class="error && 'text-red-500 border-red-500 placeholder-red-700 focus:ring-red-500 focus:border-red-500'">
+                class="appearance-none border border-gray-300 rounded-md focus:outline-none block w-full pl-3 pr-6 py-2 text-slate-700 relative"
+                :class="[error && 'text-red-500 border-red-500 placeholder-red-700 focus:ring-red-500 focus:border-red-500', disabled ? 'bg-slate-100' : 'bg-white']">
                 <div class="absolute inset-0" @click="popup = true">
                     <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -141,7 +143,7 @@ onMounted(() => {
                     </li>
                 </ul> -->
             </div>
-            <div v-if="popup" ref="selector" class="relative">
+            <div v-if="popup && !disabled" ref="selector" class="relative">
                 <div
                     class="w-full absolute bg-white top-0 max-h-48 overflow-y-scroll z-10 border border-gray-300 text-gray-900 shadow-md">
                     <ul>

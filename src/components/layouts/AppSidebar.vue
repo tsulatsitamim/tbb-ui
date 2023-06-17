@@ -14,7 +14,7 @@ defineProps({
   }
 })
 
-defineEmits(['logout'])
+const emit = defineEmits(['logout'])
 
 const route = useRoute()
 

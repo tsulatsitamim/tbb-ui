@@ -13,7 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="z-[90]">
     <div
       class="fixed lg:hidden top-0 left-0 right-0 bg-white h-14 shadow-[0_0_40px_0px_rgb(82,63,105,0.1)] flex items-center justify-between px-4 z-[90]">
       <a href="/" class="flex items-center">
@@ -28,9 +28,9 @@ onMounted(() => {
           <span
             class="right-0 cursor-pointer bg-slate-400 group-hover:bg-indigo-700 h-[3px] w-full inline-block rounded absolute"
             :class="{
-              'after:w-3/4 after:content-[\'\'] after:h-[3px] after:right-0 after:bg-slate-400 after:group-hover:bg-indigo-700 after:absolute after:rounded after:-bottom-2': true,
-              'before:w-1/2 before:content-[\'\'] before:h-[3px] before:right-0 before:bg-slate-400 before:group-hover:bg-indigo-700 before:absolute before:rounded before:-top-2': true
-            }"></span>
+                  'after:w-3/4 after:content-[\'\'] after:h-[3px] after:right-0 after:bg-slate-400 after:group-hover:bg-indigo-700 after:absolute after:rounded after:-bottom-2': true,
+                  'before:w-1/2 before:content-[\'\'] before:h-[3px] before:right-0 before:bg-slate-400 before:group-hover:bg-indigo-700 before:absolute before:rounded before:-top-2': true
+                }"></span>
         </button>
         <button class="ml-2">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 fill-slate-300 hover:fill-indigo-700">

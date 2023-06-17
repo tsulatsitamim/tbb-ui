@@ -8,7 +8,7 @@ const props = withDefaults(defineProps<{
     modelValue?: string | number | any[]
     items?: any[]
     multiple?: boolean
-    disabled?: boolean
+    disabled?: boolean | number | string
     error?: string
 }>(), {
     label: '',

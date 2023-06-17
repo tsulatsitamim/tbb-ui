@@ -1,21 +1,14 @@
 <script setup lang="ts">
 import type { DTable } from './DataTable.spec'
-import type { $Fetch } from "ofetch";
 import { ofetch } from "ofetch";
 import DataTable from './DataTable.vue';
 import { ref } from 'vue';
 import type { Ref } from 'vue';
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
   table: DTable,
-  ofetch?: $Fetch,
   crudPath: string
-}>(), {
-  ofetch() {
-    return ofetch
-  }
-})
-
+}>()
 const loading = ref(false)
 const dataTable: Ref<InstanceType<typeof DataTable> | null> = ref(null)
 
@@ -26,7 +19,11 @@ const deleteItem = async (id: string | number) => {
 
   loading.value = true
   try {
-    await props.ofetch(`${props.table.url?.split('?')[0]}/${id}`, { method: "DELETE" })
+    await ofetch(`${props.table.url?.split('?')[0]}/${id}`, {
+      method: "DELETE", headers: {
+        ...(props.table.headers || {})
+      }
+    })
     dataTable.value?.fetchData()
   } catch (error) {
     alert('Mohon maaf ada gangguan sistem.')

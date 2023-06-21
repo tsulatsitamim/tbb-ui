@@ -144,28 +144,29 @@ onMounted(() => {
                 </ul> -->
             </div>
             <div v-if="popup && !disabled" ref="selector" class="relative">
-                <div
-                    class="w-full absolute bg-white top-0 max-h-48 overflow-y-scroll z-10 border border-gray-300 text-gray-900 shadow-md">
-                    <ul>
-                        <li class="p-1 pb-2">
-                            <input ref="input" v-model="query" type="text"
-                                class="p-2 shadow-md border rounded focus:outline-none ring-blue-500 border-blue-500 w-full"
-                                :placeholder="selectedItems.length ? '' : placeholder || `Pencarian ${label || 'Item'}`" />
-                        </li>
-                        <li v-for="item in displayedItems" :key="item.id"
-                            class="py-2 px-5 cursor-pointer hover:bg-indigo-500 hover:text-white"
-                            :class="[item.selected && 'bg-slate-200']" @click="
-                                item.selected
-                                    ? removeItem(selectedItems.findIndex((x) => x.id === item.id))
-                                    : selectItem(item)
-                                ">
-                            {{ item.name }}
-                        </li>
-                        <li v-if="!displayedItems.length"
-                            class="py-2 px-5 cursor-pointer text-xs text-center text-gray-400">
-                            No results found
-                        </li>
-                    </ul>
+                <div class="w-full absolute bg-white top-0  z-10 border border-gray-300 text-gray-900 shadow-md">
+                    <div class="p-1">
+                        <input ref="input" v-model="query" type="text"
+                            class="p-2 shadow-md border rounded focus:outline-none ring-blue-500 border-blue-500 w-full"
+                            :placeholder="selectedItems.length ? '' : placeholder || `Pencarian ${label || 'Item'}`" />
+                    </div>
+                    <div class="max-h-48 overflow-y-scroll relative">
+                        <ul>
+                            <li v-for="item in displayedItems" :key="item.id"
+                                class="py-2 px-5 cursor-pointer hover:bg-indigo-500 hover:text-white"
+                                :class="[item.selected && 'bg-slate-200']" @click="
+                                    item.selected
+                                        ? removeItem(selectedItems.findIndex((x) => x.id === item.id))
+                                        : selectItem(item)
+                                    ">
+                                {{ item.name }}
+                            </li>
+                            <li v-if="!displayedItems.length"
+                                class="py-2 px-5 cursor-pointer text-xs text-center text-gray-400">
+                                No results found
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

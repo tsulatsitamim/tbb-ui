@@ -14,4 +14,5 @@ export interface DTable {
   mapper?: any
   search?: boolean
   headers?: any
+  defaultSort?: {column: string, order: 'asc' | 'desc'}
 }

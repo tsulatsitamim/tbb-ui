@@ -40,13 +40,13 @@ onMounted(() => {
       class="w-[265px] left-[-300px] fixed lg:left-0 top-0 bottom-0 bg-white z-[95] shadow-[0_0_28px_0_rgb(82,63,105,0.08);]">
       <div class="h-16 px-6 flex items-center">
         <a href="/" class="flex items-center">
-          <img src="/img/logo.png" class="h-7" alt="Logo" />
+          <img src="/img/logo.png" class="h-10" alt="Logo" />
           <span class="ml-3 text-base font-semibold text-indigo-500 hover:text-indigo-700">{{
             title
           }}</span>
         </a>
       </div>
-      <div>
+      <div class="h-[calc(100%-4rem)] overflow-y-auto pb-10">
         <div class="my-3">
           <ul class="text-gray-700">
             <template v-for="menu in menus" :key="menu.path">

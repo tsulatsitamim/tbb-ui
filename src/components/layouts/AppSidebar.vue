@@ -70,7 +70,7 @@ onMounted(() => {
                 <li class="menu"
                   :class="(route.path === menu.path || (menu.path !== '/' && route.path.includes(menu.path))) && 'menu-open'">
                   <!-- Menu Title -->
-                  <div v-if="!menu.path" class="px-6 py-3 uppercase text-[0.675rem] text-gray-500">{{ menu.name }}
+                  <div v-if="!menu.path" class="px-6 py-3 uppercase text-[0.675rem] text-gray-500 mt-3">{{ menu.name }}
                   </div>
 
                   <!-- Menu Groups -->

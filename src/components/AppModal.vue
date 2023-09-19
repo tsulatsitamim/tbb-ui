@@ -5,7 +5,8 @@ import AppButton from './button/AppButton.vue';
 withDefaults(defineProps<{
     title: string
     saveLabel: string
-}>(), { saveLabel: 'Simpan' })
+    footer?: boolean
+}>(), { saveLabel: 'Simpan', footer: true })
 const emit = defineEmits(['save',])
 const show = ref(false)
 
@@ -56,7 +57,7 @@ defineExpose({
                 </div>
 
                 <!-- Modal footer -->
-                <div class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b">
+                <div v-if="footer" class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b">
                     <AppButton color="outline-secondary" @click="close">Batal</AppButton>
                     <AppButton @click="emit('save')">{{ saveLabel }}</AppButton>
                 </div>

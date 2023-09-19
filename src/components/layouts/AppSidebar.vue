@@ -46,7 +46,9 @@ onMounted(() => {
     const menu = document.querySelector('.menu-open')
     if (menu) {
       const submenuGroup = menu.querySelector('.submenu-group')
-      submenuGroup.style.height = `${submenuGroup.dataset.height}px`
+      if (submenuGroup) {
+        submenuGroup.style.height = `${submenuGroup.dataset.height}px`
+      }
     }
   })
 })

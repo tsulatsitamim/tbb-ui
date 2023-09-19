@@ -23,7 +23,9 @@ const toggleMenu = (e) => {
   const menu = e.target.closest('li')
   menu.classList.toggle("menu-open")
   const submenuGroup = menu.querySelector('.submenu-group')
-  submenuGroup.style.height = menu.classList.contains('menu-open') ? `${submenuGroup.dataset.height}px` : 0
+  if (submenuGroup) {
+    submenuGroup.style.height = menu.classList.contains('menu-open') ? `${submenuGroup.dataset.height}px` : 0
+  }
 }
 
 const closeSidebar = () => {

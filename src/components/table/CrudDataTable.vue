@@ -42,9 +42,10 @@ defineExpose({
       <slot name="header"></slot>
     </template>
     <template #column(action)="{ data }">
-      <div class="flex justify-center">
+      <div class="flex justify-center space-x-3">
+        <slot name="action" :data="data"></slot>
         <NuxtLink :to="`${crudPath}/${data.id}`"
-          class="text-xs font-bold text-blue-500 shadow-none mr-3 hover:opacity-75">
+          class="text-xs font-bold text-blue-500 shadow-none hover:opacity-75">
           EDIT
         </NuxtLink>
         <button class="text-xs font-bold text-blue-500 shadow-none hover:opacity-75" @click="deleteItem(data.id)">

@@ -25,7 +25,7 @@ defineEmits(['click'])
 
 <template>
   <button class="rounded-md hover:brightness-95 font-medium inline-flex items-center px-3.5 py-2.5 text-xs" :class="`${colors[color]} ${(loading || disabled) && 'opacity-60 cursor-not-allowed disabled'
-    }`" :disabled="!!loading" @click="$emit('click')">
+    }`" :disabled="!!loading" @click="$emit('click', $event)">
     <div class="relative flex items-center" :class="`${loading && 'pl-5'}`">
       <!-- TODO: SVG Loading For Campact -->
       <svg v-if="loading" class="animate-spin h-5 w-5 text-white absolute -left-1" xmlns="http://www.w3.org/2000/svg"

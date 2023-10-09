@@ -82,7 +82,7 @@ const fetchData = async () => {
   try {
     const { data } = await axios.get(
       `${props.table.url}${props.table.url.includes('?') ? '&' : '?'}pagination[page]=${pagination.page
-      }&pagination[perpage]=${pagination.perpage}&sort[field]=${sortField.value}&sort[order]=${sortOrder.value}&query=${query.value}`, { headers: props.table.headers || {} }
+      }&pagination[perpage]=${pagination.perpage}&sort[field]=${sortField.value}&sort[order]=${sortOrder.value}${query.value ? `&query=${query.value}` : ''}`, { headers: props.table.headers || {} }
     )
 
     if (!data.meta) {

@@ -7,7 +7,7 @@ withDefaults(defineProps<{
     saveLabel?: string
     footer?: boolean
     loading?: boolean
-}>(), { saveLabel: 'Simpan', footer: true })
+}>(), { saveLabel: 'Simpan', footer: true, loading: false })
 const emit = defineEmits(['save',])
 const show = ref(false)
 
@@ -60,7 +60,7 @@ defineExpose({
                 <!-- Modal footer -->
                 <div v-if="footer" class="flex items-center justify-end p-6 space-x-2 border-t border-gray-200 rounded-b">
                     <AppButton color="outline-secondary" @click="close">Batal</AppButton>
-                    <AppButton @click="emit('save', $event)">{{ saveLabel }}</AppButton>
+                    <AppButton @click="emit('save', $event)" :loading="loading">{{ saveLabel }}</AppButton>
                 </div>
             </div>
         </div>

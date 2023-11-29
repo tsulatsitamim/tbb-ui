@@ -28,8 +28,8 @@ defineEmits(['logout'])
 
 <template>
   <div class="h-full flex flex-col">
-    <AppSidebar :title="settings.title" :menus="menus" @logout="$emit('logout')"></AppSidebar>
-    <AppNavbar :title="settings.title" :user-name="userName"></AppNavbar>
+    <AppSidebar v-if="userName" :title="settings.title" :menus="menus" @logout="$emit('logout')"></AppSidebar>
+    <AppNavbar v-if="userName" :title="settings.title" :user-name="userName"></AppNavbar>
     <div id="content" class="lg:pl-[265px] flex-grow flex flex-col">
       <div class="pt-5 px-5 lg:pt-6 lg:px-6 flex justify-between items-center w-full" :class="title ? 'pb-4 lg:pb-4' : 'pb-0'">
         <div class="font-medium text-base"> {{ title }}</div>

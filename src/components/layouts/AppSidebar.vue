@@ -101,7 +101,7 @@ onMounted(() => {
                   </template>
 
                   <!-- Menu -->
-                  <RouterLink v-else :to="menu.path" class="flex items-center gap-3 px-6 py-3 menu-item"
+                  <RouterLink v-else :to="menu.path" class="flex items-center gap-3 px-6 py-3 menu-item" :class="menu.path !== '/' && route.path.includes(menu.path) && 'menu-active'"
                     @click="closeSidebar">
                     <div>
                       <div v-if="typeof menu.icon === 'string'" v-html="menu.icon"></div>
@@ -183,7 +183,8 @@ body.sidebar-active #aside-overlay {
   .menu-item,
   .menu-expand-item {
 
-    &.router-link-active,
+    &.router-link-exact-active,
+    &.menu-active,
     &:hover {
       color: #5867dd;
       background-color: rgb(241 245 249);

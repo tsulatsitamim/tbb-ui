@@ -35,7 +35,7 @@ defineEmits(['logout'])
       @logout="$emit('logout')"
     ></AppSidebar>
     <AppNavbar v-if="userName" :title="settings.title" :user-name="userName"></AppNavbar>
-    <div id="content" class="lg:pl-[265px] flex flex-col">
+    <div id="content" class="lg:pl-[265px] h-full flex flex-col">
       <div class="grow">
         <slot></slot>
       </div>

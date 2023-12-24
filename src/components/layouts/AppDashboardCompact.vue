@@ -35,10 +35,8 @@ defineEmits(['logout'])
       @logout="$emit('logout')"
     ></AppSidebar>
     <AppNavbar v-if="userName" :title="settings.title" :user-name="userName"></AppNavbar>
-    <div id="content" class="lg:pl-[265px] h-full flex flex-col">
-      <div class="grow">
-        <slot></slot>
-      </div>
+    <div id="content" class="lg:pl-[265px] flex-grow flex flex-col">
+      <slot></slot>
       <div class="bg-white py-3 px-6 text-right">
         <span class="mr-1 text-slate-400">{{ new Date().getFullYear() }}</span> {{ settings.title }}
       </div>

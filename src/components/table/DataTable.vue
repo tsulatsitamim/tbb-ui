@@ -8,6 +8,7 @@ import type { DTable } from './DataTable.spec'
 import Footer from './TableFooter.vue'
 import IconArrowUp from '../icons/IconArrowUp.vue'
 import IconArrowDown from '../icons/IconArrowDown.vue'
+import { ofetch } from 'ofetch'
 
 type NV = <T>(item: any, arr: string[]) => T;
 const getNestedValue: NV = (item, arr) => {
@@ -80,7 +81,7 @@ const fetchData = async () => {
   remoteLoading.value = true
 
   try {
-    const { data } = await axios.get(
+    const { data } = await ofetch(
       `${props.table.url}${props.table.url.includes('?') ? '&' : '?'}pagination[page]=${pagination.page
       }&pagination[perpage]=${pagination.perpage}&sort[field]=${sortField.value}&sort[order]=${sortOrder.value}${query.value ? `&query=${query.value}` : ''}`, { headers: props.table.headers || {} }
     )

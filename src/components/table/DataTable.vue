@@ -1,7 +1,6 @@
 <script setup lang="ts">
 // to use this component data from array or server should have unique ID
 
-import axios from 'axios'
 import { onMounted, reactive, ref, watch } from 'vue'
 import type { Ref } from 'vue'
 import type { DTable } from './DataTable.spec'

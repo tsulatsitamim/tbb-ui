@@ -81,7 +81,7 @@ const fetchData = async () => {
   remoteLoading.value = true
 
   try {
-    const { data } = await ofetch(
+    const data = await ofetch(
       `${props.table.url}${props.table.url.includes('?') ? '&' : '?'}pagination[page]=${pagination.page
       }&pagination[perpage]=${pagination.perpage}&sort[field]=${sortField.value}&sort[order]=${sortOrder.value}${query.value ? `&query=${query.value}` : ''}`, { headers: props.table.headers || {} }
     )

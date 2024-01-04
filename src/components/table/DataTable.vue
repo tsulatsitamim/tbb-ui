@@ -188,7 +188,7 @@ const checkAll = (e: any) => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(row, i) in rows" :key="row.id" class="border-b last:border-b-0">
+          <tr v-for="(row, i) in rows" :key="`${row.id}_${i}`" class="border-b last:border-b-0">
             <th v-if="computedTable.checkbox">
               <input v-model="checkedRows" type="checkbox" :value="row.id"
                 class="mt-1 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded">

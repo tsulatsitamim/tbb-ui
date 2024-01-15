@@ -1,12 +1,20 @@
 <script setup>
-defineProps(['modelValue', 'label', 'disabled', 'placeholder', 'type', 'error', 'items'])
+const props = defineProps(['modelValue', 'label', 'disabled', 'placeholder', 'type', 'error', 'items', 'cache'])
 const emit = defineEmits(['update:modelValue'])
+const cacheValue = localStorage.getItem(props.cache)
+
+const update = (e) => {
+    if (props.cache) {
+        localStorage.setItem(props.cache, e.target.value)
+    }
+    emit('update:modelValue', e.target.value)
+}
 </script>
 
 <template>
     <fieldset class="border border-gray-300 rounded-md py-2 relative text-gray-600 pr-3">
-        <select class="focus:outline-none bg-transparent px-3 peer w-full" :value="modelValue"
-            @input="emit('update:modelValue', $event.target.value)">
+        <select class="focus:outline-none bg-transparent px-3 peer w-full" :value="modelValue || cacheValue"
+            @input="update">
             <option v-for="item in items" :value="item.id" :key="item.id">{{ item.name }}</option>
         </select>
         <legend class="font-semibold leading-[0] px-2 ml-2 text-[11px] peer-focus:block text-gray-400"

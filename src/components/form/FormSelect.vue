@@ -40,7 +40,7 @@ const update = (e: any) => {
           <option value="" disabled selected>
             {{ placeholder || `Pilih ${label || 'Item'}` }}
           </option>
-          <option v-for="item in items" :key="item.id" :value="item.id"
+          <option v-for="item in items.filter(x => x)" :key="item.id" :value="item.id"
             :selected="item.id == modelValue || item.id == localValue">
             {{ item.name }}
           </option>

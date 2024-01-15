@@ -33,7 +33,7 @@ const selectedItems: Ref<any[]> = ref([])
 const displayedItems = computed(() => {
     const ids = selectedItems.value.map((x) => x.id)
     return props.items
-        .filter((x) => (x.name || '').toLowerCase().includes(query.value.toLowerCase()))
+        .filter((x) => x && (x.name || '').toLowerCase().includes(query.value.toLowerCase()))
         .map((x) => ({
             ...x,
             selected: ids.includes(x.id),

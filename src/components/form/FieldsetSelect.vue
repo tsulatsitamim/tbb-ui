@@ -9,7 +9,7 @@ const update = (e) => {
     emit('update:modelValue', e.target.value)
 }
 
-const mapper = (x) => typeof x === 'string' ? ({id: x, name: x}) : x
+const mapper = (items) => items.map( (x) => typeof x === 'string' ? ({id: x, name: x}) : x)
 </script>
 
 <template>

@@ -1,11 +1,11 @@
 <script setup>
-import { nextTick, onMounted } from 'vue'
+import { computed, nextTick, onMounted } from 'vue'
 import { useRoute } from 'vue-router';
 import IconHome from '../icons/IconHome.vue';
 import IconAngleRight from '../icons/IconAngleRight.vue';
+import { selectedRoute } from "./selectedRoute";
 
-
-defineProps({
+const props = defineProps({
   title: { type: String, default: 'TBB UI' },
   menus: {
     type: Array,
@@ -52,6 +52,10 @@ onMounted(() => {
     }
   })
 })
+
+const activeRoute = computed(() => {
+  return selectedRoute(route.path, props.menus.map(x => x.path))
+})
 </script>
 
 <template>
@@ -71,8 +75,7 @@ onMounted(() => {
           <ul class="text-gray-700">
             <template v-for="menu in menus" :key="menu.path">
               <template v-if="menu.show !== false">
-                <li class="menu"
-                  :class="(route.path === menu.path || (menu.path !== '/' && route.path.includes(menu.path))) && 'menu-open'">
+                <li class="menu" :class="(route.path === menu.path || (menu.path === activeRoute)) && 'menu-open'">
                   <!-- Menu Title -->
                   <div v-if="!menu.path" class="px-6 pt-6 pb-2 uppercase text-[0.675rem] text-gray-500">{{ menu.name }}
                   </div>
@@ -101,8 +104,8 @@ onMounted(() => {
                   </template>
 
                   <!-- Menu -->
-                  <RouterLink v-else :to="menu.path" class="flex items-center gap-3 px-6 py-3 menu-item" :class="menu.path !== '/' && route.path.includes(menu.path) && 'menu-active'"
-                    @click="closeSidebar">
+                  <RouterLink v-else :to="menu.path" class="flex items-center gap-3 px-6 py-3 menu-item"
+                    :class="menu.path === activeRoute && 'menu-active'" @click="closeSidebar">
                     <div>
                       <div v-if="typeof menu.icon === 'string'" v-html="menu.icon"></div>
                       <component v-else :is="menu.icon" class="svg-component h-5 fill-[#c4cff9]">
@@ -183,7 +186,6 @@ body.sidebar-active #aside-overlay {
   .menu-item,
   .menu-expand-item {
 
-    &.router-link-exact-active,
     &.menu-active,
     &:hover {
       color: #5867dd;

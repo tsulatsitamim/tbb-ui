@@ -91,10 +91,8 @@ const fetchData = async () => {
     }
 
     rows.value = data.data
-    // pagination.page = data.meta.page
-    pagination.pages = Math.ceil((data.meta.total || 1) / data.meta.perpage)
+    pagination.pages = Math.ceil((data.meta.total || 1) / pagination.perpage)
     pagination.total = data.meta.total
-    // pagination.perpage = data.meta.perpage
   } catch (error) {
     console.log(error)
     alert('Gagal mengambil data.')

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
   modelValue?: string | null
-  label: string
+  label?: string
   placeholder?: string
   error?: string
   help?: string

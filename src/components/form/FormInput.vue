@@ -22,11 +22,12 @@ defineEmits(['update:modelValue'])
     </label>
     <div>
       <input v-if="type !== 'file'" :value="modelValue" :type="type" :disabled="!!disabled"
-        class="bg-white border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2"
+        class="border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2"
         :class="{
             'border-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500':
               error,
-              'opacity-85 bg-slate-200': !!disabled
+              'opacity-85 bg-slate-200': !!disabled,
+              'bg-white': !disabled
           }" :placeholder="placeholder || `Masukan ${label || 'Input'}`"
         @input="$emit('update:modelValue', ($event!.target as HTMLInputElement).value)" />
       <input v-else type="file" :accept="accept" :disabled="!!disabled"
@@ -34,7 +35,8 @@ defineEmits(['update:modelValue'])
         :class="{
             'border-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500':
               error,
-              'opacity-85 bg-slate-200': !!disabled
+              'opacity-85 bg-slate-200': !!disabled,
+              'bg-white': !disabled
           }" @input="$emit('update:modelValue', ($event!.target as HTMLInputElement).files![0])" />
       <p v-if="error" class="mt-2 text-xs text-red-600">
         {{ error }}

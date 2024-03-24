@@ -7,6 +7,7 @@ withDefaults(defineProps<{
   error?: string,
   help?: string,
   accept?: string,
+  disabled?: boolean | string | number
 }>(), {
   type: 'text',
 })
@@ -20,18 +21,20 @@ defineEmits(['update:modelValue'])
       {{ label }}
     </label>
     <div>
-      <input v-if="type !== 'file'" :value="modelValue" :type="type"
+      <input v-if="type !== 'file'" :value="modelValue" :type="type" :disabled="!!disabled"
         class="bg-white border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2"
         :class="{
             'border-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500':
               error,
+              'opacity-85': !!disabled
           }" :placeholder="placeholder || `Masukan ${label || 'Input'}`"
         @input="$emit('update:modelValue', ($event!.target as HTMLInputElement).value)" />
-      <input v-else type="file" :accept="accept"
+      <input v-else type="file" :accept="accept" :disabled="!!disabled"
         class="bg-gray-50 border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full px-3 py-2"
         :class="{
             'border-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500':
               error,
+              'opacity-85': !!disabled
           }" @input="$emit('update:modelValue', ($event!.target as HTMLInputElement).files![0])" />
       <p v-if="error" class="mt-2 text-xs text-red-600">
         {{ error }}

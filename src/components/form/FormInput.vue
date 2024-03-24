@@ -26,7 +26,7 @@ defineEmits(['update:modelValue'])
         :class="{
             'border-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500':
               error,
-              'opacity-85 bg-slate-200': !!disabled,
+              'opacity-85 bg-slate-100': !!disabled,
               'bg-white': !disabled
           }" :placeholder="placeholder || `Masukan ${label || 'Input'}`"
         @input="$emit('update:modelValue', ($event!.target as HTMLInputElement).value)" />
@@ -35,7 +35,7 @@ defineEmits(['update:modelValue'])
         :class="{
             'border-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500':
               error,
-              'opacity-85 bg-slate-200': !!disabled,
+              'opacity-85 bg-slate-100': !!disabled,
               'bg-white': !disabled
           }" @input="$emit('update:modelValue', ($event!.target as HTMLInputElement).files![0])" />
       <p v-if="error" class="mt-2 text-xs text-red-600">
